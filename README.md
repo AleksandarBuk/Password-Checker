@@ -1,2 +1,2 @@
 # Password-Checker
- A Python-based password checker that verifies the security of user passwords by checking them against a secure API. Implements hashing techniques and K-anonymity principles to protect user privacy. Provides clear feedback on password strength based on API response.
+ Python-based password checker that validates user passwords against a secure API. Implements hashing and privacy protection. Provides feedback on password strength based on API response.
