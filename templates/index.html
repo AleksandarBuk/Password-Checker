@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Password Checker</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Password Checker</h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="flash-message flash-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            <label for="password">Enter a password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Check Password">
+        </form>
+    </div>
+</body>
+
+</html>
