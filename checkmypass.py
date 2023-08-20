@@ -1,9 +1,10 @@
 import requests
 import hashlib
 from flask import Flask, render_template, request, flash
+import click
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'secret_key'
 
 
 def request_api_data(query_char):
@@ -23,6 +24,8 @@ def get_password_leaks_count(hashes, hash_to_check):
     return 0
 
 
+@click.command()
+@click.option("--password", prompt=True, hide_input=True, confirmation_prompt=True, help="Password to check")
 def pwned_api_check(password):
     sha1password = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
     first5_char, tail = sha1password[:5], sha1password[5:]
@@ -41,6 +44,10 @@ def index():
         else:
             flash(f'{password} was not found. Carry on!', 'success')
     return render_template('index.html')
+
+#add tinker user interface/Pyside6
+
+#add suggestions on how to create a safe password
 
 
 if __name__ == '__main__':
