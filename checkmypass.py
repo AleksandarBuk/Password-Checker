@@ -1,7 +1,10 @@
 import requests
 import hashlib
-from flask import Flask, render_template, request, flash
 import click
+
+from flask import Flask, render_template, request, flash
+from celery_config import celery_app
+from celery.result import AsyncResult
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -24,6 +27,7 @@ def get_password_leaks_count(hashes, hash_to_check):
     return 0
 
 
+@celery_app.task
 @click.command()
 @click.option("--password", prompt=True, hide_input=True, confirmation_prompt=True, help="Password to check")
 def pwned_api_check(password):
@@ -43,11 +47,16 @@ def index():
                 f'This password was found {count} times. You should probably change your password.', 'warning')
         else:
             flash(f'{password} was not found. Carry on!', 'success')
+        # add another template for tasks in progress
     return render_template('index.html')
 
-#add tinker user interface/Pyside6
 
-#add suggestions on how to create a safe password
+# add get results function that takes tasks_id
+
+
+# add tinker user interface/Pyside6
+
+# add suggestions on how to create a safe password
 
 
 if __name__ == '__main__':
