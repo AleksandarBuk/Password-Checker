@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "password-checker"
+version = "0.1.0"
+description = ""
+authors = ["AleksandarBuk <aleksandar.buk@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^3.0.0"
+click = "^8.1.7"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

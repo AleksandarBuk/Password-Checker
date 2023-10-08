@@ -3,8 +3,7 @@ from unittest import mock
 import hashlib
 import requests
 
-import checkmypass
-
+from app import get_password_leaks_count, request_api_data
 
 class TestCheck(unittest.TestCase):
 
@@ -15,7 +14,7 @@ class TestCheck(unittest.TestCase):
         expected_response.status_code = 200
 
         with mock.patch('requests.get', return_value=expected_response) as mock_get:
-            response = checkmypass.request_api_data(query_char)
+            response = get_password_leaks_count.request_api_data(query_char)
 
             mock_get.assert_called_with(expected_url)
             self.assertEqual(response, expected_response)

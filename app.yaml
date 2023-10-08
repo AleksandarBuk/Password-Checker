@@ -1,0 +1,18 @@
+runtime: python39  # Use the Python 3.9 runtime
+
+entrypoint: gunicorn -b :$PORT app:app  # Specify the entrypoint for your application
+
+env_variables:
+  SECRET_KEY: f;jQb2d4Zu>mEWF$)h=<S}"t
+  PWNED_PASSWORDS_API_URL: 'https://api.pwnedpasswords.com/range/'  # Set the API URL
+
+automatic_scaling:
+  target_cpu_utilization: 0.5
+  min_instances: 1
+  max_instances: 10
+
+handlers:
+  - url: /static
+    static_dir: static  # Serve static files from the 'static' directory
+  - url: /.*
+    script: auto
